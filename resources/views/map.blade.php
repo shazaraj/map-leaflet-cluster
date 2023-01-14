@@ -106,7 +106,7 @@ h4 {
     <div id="mapcontainer">
       <div id="map"></div>
     </div>
-    <div class="inputs" id="year">
+    {{-- <div class="inputs" id="year">
       <h4>&nbsp;Filtrer par date&nbsp;</h4>
       <input type="checkbox" class="year" name="-150" value="-150" checked="true" style="accent-color:black;">
       <label class="input-text" for="-150">-150 à -100</label>
@@ -128,9 +128,9 @@ h4 {
       <label class="input-text" for="300">300 et + &nbsp;&nbsp; </label>
       <input type="checkbox" class="year" value="0" checked="true" style="accent-color:gray;">
       <label class="input-text" for="0">Inconnnu</label>
-    </div>
+    </div> --}}
 
-    <div class="inputs_2" id="event-type">
+    <div class="inputs" id="event-type">
       <h4> Filtrer par type &nbsp;</h4>
       <input type="checkbox" class="event-type" name="temple" value="temple" checked="true">
       <label class="input-text" for="temple">temple &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </label>
@@ -155,9 +155,9 @@ var map = L.map('map').setView([44, 6], 5);
 
 
 /* Modifie le fond de carte suivant le niveau de zoom, celui de l'Atlas of Roman Empire n'est pas disponible > 11 */
-var romanempiremap = L.tileLayer('https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://dh.gu.se/dare/">Digital Atlas of the Roman Empire (DARE) </a> contributors',
-});
+// var romanempiremap = L.tileLayer('https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
+//   attribution: '&copy; <a href="https://dh.gu.se/dare/">Digital Atlas of the Roman Empire (DARE) </a> contributors',
+// });
 
 var OSM = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -165,18 +165,18 @@ var OSM = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.pn
   maxZoom: 19
 });
 
-romanempiremap.addTo(map); //initial layer according to initial zoom
+OSM.addTo(map); //initial layer according to initial zoom
 
-map.on("zoomend", function(e) {
-  console.log("Zoom level: ", map.getZoom());
-  if (map.getZoom() > 11) { //Level 11 is the treshold 
-    map.removeLayer(romanempiremap);
-    OSM.addTo(map);
-  } else {
-    map.removeLayer(OSM);
-    romanempiremap.addTo(map);
-  }
-});
+// map.on("zoomend", function(e) {
+//   console.log("Zoom level: ", map.getZoom());
+//   if (map.getZoom() > 11) { //Level 11 is the treshold 
+//     map.removeLayer(romanempiremap);
+//     OSM.addTo(map);
+//   } else {
+//     map.removeLayer(OSM);
+//     romanempiremap.addTo(map);
+//   }
+// });
 
 let checkboxStates
 
@@ -1149,68 +1149,68 @@ const jsontest = {
 const mcg = L.markerClusterGroup().addTo(map);
 
 const geojsonLayer = L.geoJSON(null, {
-  filter: (feature) => {
-    const isYearChecked = checkboxStates.years.includes(feature.properties.year)
-    const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
-    return isYearChecked && isEventTypeChecked //only true if both are true
-  },
-  style: function getcolor(feature) {
-    var year = feature.properties.year;
-    if (year <= -150) {
-      return {
-        color: "black"
-      };
-    } else if (year >= -100 && year < -50) {
-      return {
-        color: "red"
-      };
-    } else if (year >= -50 && year < -31) {
-      return {
-        color: "orange"
-      };
-    } else if (year >= -30 && year < -1) {
-      return {
-        color: "yellow"
-      };
-    } else if (year >= 1 && year < 15) {
-      return {
-        color: "yellow"
-      };
-    } else if (year >= 15 && year < 50) {
-      return {
-        color: "lightgreen"
-      };
-    } else if (year >= 50 && year < 100) {
-      return {
-        color: "green"
-      };
-    } else if (year >= 100 && year < 150) {
-      return {
-        color: "lightblue"
-      };
-    } else if (year >= 150 && year < 200) {
-      return {
-        color: "blue"
-      };
-    } else if (year >= 200 && year < 250) {
-      return {
-        color: "darkblue"
-      };
-    } else if (year >= 250) {
-      return {
-        color: "purple"
-      };
-    } else if ((year == 0)) {
-      return {
-        color: "gray"
-      };
-    }
-  },
+  // filter: (feature) => {
+  //   const isYearChecked = checkboxStates.years.includes(feature.properties.year)
+  //   const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
+  //   return isYearChecked && isEventTypeChecked //only true if both are true
+  // },
+  // style: function getcolor(feature) {
+  //   var year = feature.properties.year;
+  //   if (year <= -150) {
+  //     return {
+  //       color: "black"
+  //     };
+  //   } else if (year >= -100 && year < -50) {
+  //     return {
+  //       color: "red"
+  //     };
+  //   } else if (year >= -50 && year < -31) {
+  //     return {
+  //       color: "orange"
+  //     };
+  //   } else if (year >= -30 && year < -1) {
+  //     return {
+  //       color: "yellow"
+  //     };
+  //   } else if (year >= 1 && year < 15) {
+  //     return {
+  //       color: "yellow"
+  //     };
+  //   } else if (year >= 15 && year < 50) {
+  //     return {
+  //       color: "lightgreen"
+  //     };
+  //   } else if (year >= 50 && year < 100) {
+  //     return {
+  //       color: "green"
+  //     };
+  //   } else if (year >= 100 && year < 150) {
+  //     return {
+  //       color: "lightblue"
+  //     };
+  //   } else if (year >= 150 && year < 200) {
+  //     return {
+  //       color: "blue"
+  //     };
+  //   } else if (year >= 200 && year < 250) {
+  //     return {
+  //       color: "darkblue"
+  //     };
+  //   } else if (year >= 250) {
+  //     return {
+  //       color: "purple"
+  //     };
+  //   } else if ((year == 0)) {
+  //     return {
+  //       color: "gray"
+  //     };
+  //   }
+  // },
   pointToLayer: function(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 8,
       weight: 2,
-      opacity: 1,
+      opacity: 3,
       fillOpacity: 0.7
 
     });
@@ -1219,7 +1219,8 @@ const geojsonLayer = L.geoJSON(null, {
   onEachFeature: function(feature, layer) {
     // variable pour le texte du popup  
     var popupText = "<b>Site:</b> " + feature.properties.field_2 +
-      "<br><b>Type:</b> " + feature.properties.eventType
+      "<br><b>Type:</b> " + feature.properties.eventType 
+      // "<br><b>site html:</b> " + feature.properties.field_2
       // dans l'idéal il faudrait ajouter un lien qui pointe vers
       //la page site, sous le § du site directement peut-être en construisant un lien
       //quand la page sites est finie: ajouter la ligne suivante dans le href
@@ -1237,42 +1238,42 @@ const geojsonLayer = L.geoJSON(null, {
   },
 }) //.addTo(map); // Do not add the GeoJSON Layer Group to the map, it is used only as a converter from GeoJSON data into Leaflet Layers
 
-function updateCheckboxStates() {
-  checkboxStates = {
-    years: [],
-    eventTypes: []
-  }
+// function updateCheckboxStates() {
+//   checkboxStates = {
+//     years: [],
+//     eventTypes: []
+//   }
 
-  for (let input of document.querySelectorAll('input')) {
-    if (input.checked) {
-      switch (input.className) {
-        case 'event-type':
-          checkboxStates.eventTypes.push(input.value);
-          break
-        case 'year':
-          checkboxStates.years.push(input.value);
-          break
-      }
-    }
-  }
-}
+//   for (let input of document.querySelectorAll('input')) {
+//     if (input.checked) {
+//       switch (input.className) {
+//         case 'event-type':
+//           checkboxStates.eventTypes.push(input.value);
+//           break
+//         case 'year':
+//           checkboxStates.years.push(input.value);
+//           break
+//       }
+//     }
+//   }
+// }
 
 
-for (let input of document.querySelectorAll('input')) {
-  //Listen to 'change' event of all inputs
-  input.onchange = (e) => {
-    mcg.clearLayers()
-    geojsonLayer.clearLayers()
-    updateCheckboxStates()
-    geojsonLayer.addData(jsontest).addTo(mcg)
-  }
-}
+// for (let input of document.querySelectorAll('input')) {
+//   //Listen to 'change' event of all inputs
+//   input.onchange = (e) => {
+//     mcg.clearLayers()
+//     geojsonLayer.clearLayers()
+//     // updateCheckboxStates()
+//     geojsonLayer.addData(jsontest).addTo(mcg)
+//   }
+// }
 
 
 
 
 /****** INIT ******/
-updateCheckboxStates()
+// updateCheckboxStates()
 geojsonLayer.addData(jsontest).addTo(mcg)
 
 </script>
