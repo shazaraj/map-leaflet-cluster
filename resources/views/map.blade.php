@@ -103,7 +103,7 @@
       <div id="map"></div>
     </div>
     
-  <div class="inputs_2" id="event-type">
+  <div class="inputs" id="event-type">
         <h4> Filtrer par type &nbsp;</h4>
         <input type="checkbox" class="event-type" name="temple" value="temple" checked="true">
         <label class="input-text" for="temple">temple &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </label>
@@ -117,7 +117,7 @@
         <label class="input-text" for="porte">porte &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; </label>
         <input type="checkbox" class="event-type" name="autre" value="autre" checked="true">
   </div>
-  <div class="inputs" id="year">
+  {{-- <div class="inputs" id="year">
     <h4>&nbsp;Filtrer par date&nbsp;</h4>
       <input type="checkbox" class="year" name="-150" value="-150" checked="true" style="accent-color:black;">
       <label class="input-text" for="-150">-150 à -100</label>  
@@ -139,7 +139,8 @@
       <label class="input-text" for="300">300 et + &nbsp;&nbsp; </label> 
       <input type="checkbox" class="year" value="0" checked="true" style="accent-color:gray;">
       <label class="input-text" for="0">Inconnnu</label>
-      </div>
+    
+  </div> --}}
   </body>
 
 </html>
@@ -1145,62 +1146,63 @@ const mcg = L.markerClusterGroup().addTo(map);
 
 const geojsonLayer = L.geoJSON(null, {
   filter: (feature) => {
-    const isYearChecked = checkboxStates.years.includes(feature.properties.year)
+    // const isYearChecked = checkboxStates.years.includes(feature.properties.year)
     const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
-    return isYearChecked && isEventTypeChecked //only true if both are true
+    // return isYearChecked && isEventTypeChecked //only true if both are true
+    return isEventTypeChecked //only true if both are true
   },
-  style: function getcolor(feature) {
-    var year = feature.properties.year;
-    if (year <= -150) {
-      return {
-        color: "black"
-      };
-    } else if (year >= -100 && year < -50) {
-      return {
-        color: "red"
-      };
-    } else if (year >= -50 && year < -31) {
-      return {
-        color: "orange"
-      };
-    } else if (year >= -30 && year < -1) {
-      return {
-        color: "yellow"
-      };
-    } else if (year >= 1 && year < 15) {
-      return {
-        color: "yellow"
-      };
-    } else if (year >= 15 && year < 50) {
-      return {
-        color: "lightgreen"
-      };
-    } else if (year >= 50 && year < 100) {
-      return {
-        color: "green"
-      };
-    } else if (year >= 100 && year < 150) {
-      return {
-        color: "lightblue"
-      };
-    } else if (year >= 150 && year < 200) {
-      return {
-        color: "blue"
-      };
-    } else if (year >= 200 && year < 250) {
-      return {
-        color: "darkblue"
-      };
-    } else if (year >= 250) {
-      return {
-        color: "purple"
-      };
-    } else if ((year == 0)) {
-      return {
-        color: "gray"
-      };
-    }
-  },
+  // style: function getcolor(feature) {
+  //   var year = feature.properties.year;
+  //   if (year <= -150) {
+  //     return {
+  //       color: "black"
+  //     };
+  //   } else if (year >= -100 && year < -50) {
+  //     return {
+  //       color: "red"
+  //     };
+  //   } else if (year >= -50 && year < -31) {
+  //     return {
+  //       color: "orange"
+  //     };
+  //   } else if (year >= -30 && year < -1) {
+  //     return {
+  //       color: "yellow"
+  //     };
+  //   } else if (year >= 1 && year < 15) {
+  //     return {
+  //       color: "yellow"
+  //     };
+  //   } else if (year >= 15 && year < 50) {
+  //     return {
+  //       color: "lightgreen"
+  //     };
+  //   } else if (year >= 50 && year < 100) {
+  //     return {
+  //       color: "green"
+  //     };
+  //   } else if (year >= 100 && year < 150) {
+  //     return {
+  //       color: "lightblue"
+  //     };
+  //   } else if (year >= 150 && year < 200) {
+  //     return {
+  //       color: "blue"
+  //     };
+  //   } else if (year >= 200 && year < 250) {
+  //     return {
+  //       color: "darkblue"
+  //     };
+  //   } else if (year >= 250) {
+  //     return {
+  //       color: "purple"
+  //     };
+  //   } else if ((year == 0)) {
+  //     return {
+  //       color: "gray"
+  //     };
+  //   }
+  // },
   pointToLayer: function(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 8,
@@ -1234,7 +1236,7 @@ const geojsonLayer = L.geoJSON(null, {
 
 function updateCheckboxStates() {
   checkboxStates = {
-    years: [],
+    // years: [],
     eventTypes: []
   }
 
@@ -1244,9 +1246,9 @@ function updateCheckboxStates() {
         case 'event-type':
           checkboxStates.eventTypes.push(input.value);
           break
-        case 'year':
-          checkboxStates.years.push(input.value);
-          break
+        // case 'year':
+        //   checkboxStates.years.push(input.value);
+        //   break
       }
     }
   }
