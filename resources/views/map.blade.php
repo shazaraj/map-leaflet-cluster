@@ -23,141 +23,135 @@
     <link rel="stylesheet" href="styles/L.Control.BetterScale.css" />
 
   </head>
+
   <style>
     #mapcontainer {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: fixed;
+    display: flex;
+	width: 100%;
+	height: 100%;
+	position: fixed;
 }
 
 #map {
-  z-index: 0;
-  flex: 1;
-}
-
-.inputs,
+	z-index:0;
+	flex: 1;   
+	}
+  
+  .inputs, .inputs_2 {
+	width: 110px;
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	z-index: 1;
+	background-color: #eee;
+	flex-wrap: wrap;
+	margin: 5px;
+	padding: 5px;
+	border: solid;
+	border-width: thin; 
+	border-radius: 5%;
+	text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal; 
+	display: flex;
+	}
+	
 .inputs_2 {
-  width: 110px;
-  position: fixed;
-  right: 0px;
-  top: 0px;
-  z-index: 1;
-  background-color: #eee;
-  flex-wrap: wrap;
-  margin: 5px;
-  padding: 5px;
-  border: solid;
-  border-width: thin;
-  border-radius: 5%;
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  display: flex;
+	top: 240px;	
 }
-
-.inputs_2 {
-  top: 240px;
-}
-
-.input-text {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 14px;
-  color: #777;
-  flex-wrap: wrap;
+	
+.input-text{
+	font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+	font-size: 14px;
+	color: #777;
+	flex-wrap: wrap;
 }
 
 
 @media (max-width: 500px) {
-
-  .inputs,
+  .inputs, .inputs_2 {
+    position: fixed;
+	right: 0px;
+	top: 0px;
+	max-width: 110px;
+	min-width: 90px;
+  }
   .inputs_2 {
     position: fixed;
-    right: 0px;
-    top: 0px;
-    max-width: 110px;
-    min-width: 90px;
-  }
-
-  .inputs_2 {
-    position: fixed;
-    right: 0px;
-    top: 240px;
-  }
+	right: 0px;
+	top: 240px;
+  } 
 }
-
 h4 {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 0px;
-  padding-bottom: 4px;
-  margin: 0;
-  vertical-align: center;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+	font-size: 12px;
+    padding: 0px;
+	padding-bottom: 4px;
+	margin: 0;
+	vertical-align: center;	
 }
 
   </style>
-
   <body>
-
+   
     <!-- Carte-->
     <div id="mapcontainer">
       <div id="map"></div>
     </div>
-    {{-- <div class="inputs" id="year">
-      <h4>&nbsp;Filtrer par date&nbsp;</h4>
-      <input type="checkbox" class="year" name="-150" value="-150" checked="true" style="accent-color:black;">
-      <label class="input-text" for="-150">-150 à -100</label>
-      <input type="checkbox" class="year" name="-100" value="-100" checked="true" style="accent-color:red;">
-      <label class="input-text" for="-100">-100 à -30</label>
-      <input type="checkbox" class="year" name="-30" value="-30" checked="true" style="accent-color:yellow;">
-      <label class="input-text" for="-30">-30 à 15 &nbsp; </label>
-      <input type="checkbox" class="year" value="15" checked="true" style="accent-color:lightgreen;">
-      <label class="input-text" for="15">15 à 50 &nbsp; &nbsp;</label>
-      <input type="checkbox" class="year" name="50" value="50" checked="true" style="accent-color:green;">
-      <label class="input-text" for="50">50 à 100 &nbsp;</label>
-      <input type="checkbox" class="year" name="100" value="100" checked="true" style="accent-color:lightblue;">
-      <label class="input-text" for="100">100 à 150</label>
-      <input type="checkbox" class="year" name="150" value="150" checked="true" style="accent-color:blue;">
-      <label class="input-text" for="150">150 à 200</label>
-      <input type="checkbox" class="year" name="200" value="200" checked="true" style="accent-color:darkblue;">
-      <label class="input-text" for="200">200 à 300</label>
-      <input type="checkbox" class="year" name="300" value="300" checked="true" style="accent-color:purple;">
-      <label class="input-text" for="300">300 et + &nbsp;&nbsp; </label>
-      <input type="checkbox" class="year" value="0" checked="true" style="accent-color:gray;">
-      <label class="input-text" for="0">Inconnnu</label>
-    </div> --}}
-
-    <div class="inputs" id="event-type">
-      <h4> Filtrer par type &nbsp;</h4>
-      <input type="checkbox" class="event-type" name="temple" value="temple" checked="true">
-      <label class="input-text" for="temple">temple &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </label>
-      <input type="checkbox" class="event-type" name="funéraire" value="funéraire" checked="true">
-      <label class="input-text" for="funéraire">funéraire &nbsp;&nbsp; </label>
-      <input type="checkbox" class="event-type" name="spectacle" value="spectacle" checked="true">
-      <label class="input-text" for="spectacle">spectacle &nbsp;&nbsp; </label>
-      <input type="checkbox" class="event-type" name="aqueduc" value="aqueduc" checked="true">
-      <label class="input-text" for="exhibition">aqueduc &nbsp;&nbsp; </label>
-      <input type="checkbox" class="event-type" name="porte" value="porte" checked="true">
-      <label class="input-text" for="porte">porte &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </label>
-      <input type="checkbox" class="event-type" name="autre" value="autre" checked="true">
-    </div>
-
+    <div class="inputs" id="year">
+<h4>&nbsp;Filtrer par date&nbsp;</h4>
+  <input type="checkbox" class="year" name="-150" value="-150" checked="true" style="accent-color:black;">
+  <label class="input-text" for="-150">-150 à -100</label>  
+    <input type="checkbox" class="year" name="-100" value="-100" checked="true" style="accent-color:red;">
+  <label class="input-text" for="-100">-100 à -30</label>  
+    <input type="checkbox" class="year" name="-30" value="-30" checked="true" style="accent-color:yellow;">
+  <label class="input-text" for="-30">-30 à 15 &nbsp; </label>  
+  <input type="checkbox" class="year" value="15" checked="true" style="accent-color:lightgreen;">
+  <label class="input-text" for="15">15 à 50 &nbsp; &nbsp;</label> 
+    <input type="checkbox" class="year" name="50" value="50" checked="true" style="accent-color:green;">
+  <label class="input-text" for="50">50 à 100 &nbsp;</label>  
+    <input type="checkbox" class="year" name="100" value="100" checked="true" style="accent-color:lightblue;">
+  <label class="input-text" for="100">100 à 150</label>  
+    <input type="checkbox" class="year" name="150" value="150" checked="true" style="accent-color:blue;">
+  <label class="input-text" for="150">150 à 200</label>  
+    <input type="checkbox" class="year" name="200" value="200" checked="true" style="accent-color:darkblue;">
+  <label class="input-text" for="200">200 à 300</label> 
+    <input type="checkbox" class="year" name="300" value="300" checked="true" style="accent-color:purple;">
+  <label class="input-text" for="300">300 et + &nbsp;&nbsp; </label> 
+  <input type="checkbox" class="year" value="0" checked="true" style="accent-color:gray;">
+  <label class="input-text" for="0">Inconnnu</label>
+  </div>
+  
+  <div class="inputs_2" id="event-type">
+  <h4> Filtrer par type &nbsp;</h4>
+  <input type="checkbox" class="event-type" name="temple" value="temple" checked="true">
+  <label class="input-text" for="temple">temple &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </label>
+  <input type="checkbox" class="event-type" name="funéraire" value="funéraire" checked="true">
+  <label class="input-text" for="funéraire">funéraire &nbsp;&nbsp; </label>
+  <input type="checkbox" class="event-type" name="spectacle" value="spectacle" checked="true">
+  <label class="input-text" for="spectacle">spectacle &nbsp;&nbsp; </label>
+  <input type="checkbox" class="event-type" name="aqueduc" value="aqueduc" checked="true">
+  <label class="input-text" for="exhibition">aqueduc &nbsp;&nbsp; </label>
+  <input type="checkbox" class="event-type" name="porte" value="porte" checked="true">
+  <label class="input-text" for="porte">porte &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; </label>
+  <input type="checkbox" class="event-type" name="autre" value="autre" checked="true">
+</div>
+   
   </body>
 
 </html>
 
 <script>
-
-var map = L.map('map').setView([44, 6], 5);
+  var map = L.map('map').setView([44, 6], 5);
 
 
 /* Modifie le fond de carte suivant le niveau de zoom, celui de l'Atlas of Roman Empire n'est pas disponible > 11 */
-// var romanempiremap = L.tileLayer('https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
-//   attribution: '&copy; <a href="https://dh.gu.se/dare/">Digital Atlas of the Roman Empire (DARE) </a> contributors',
-// });
+var romanempiremap = L.tileLayer('https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://dh.gu.se/dare/">Digital Atlas of the Roman Empire (DARE) </a> contributors',
+});
 
 var OSM = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -1149,68 +1143,68 @@ const jsontest = {
 const mcg = L.markerClusterGroup().addTo(map);
 
 const geojsonLayer = L.geoJSON(null, {
-  // filter: (feature) => {
-  //   const isYearChecked = checkboxStates.years.includes(feature.properties.year)
-  //   const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
-  //   return isYearChecked && isEventTypeChecked //only true if both are true
-  // },
-  // style: function getcolor(feature) {
-  //   var year = feature.properties.year;
-  //   if (year <= -150) {
-  //     return {
-  //       color: "black"
-  //     };
-  //   } else if (year >= -100 && year < -50) {
-  //     return {
-  //       color: "red"
-  //     };
-  //   } else if (year >= -50 && year < -31) {
-  //     return {
-  //       color: "orange"
-  //     };
-  //   } else if (year >= -30 && year < -1) {
-  //     return {
-  //       color: "yellow"
-  //     };
-  //   } else if (year >= 1 && year < 15) {
-  //     return {
-  //       color: "yellow"
-  //     };
-  //   } else if (year >= 15 && year < 50) {
-  //     return {
-  //       color: "lightgreen"
-  //     };
-  //   } else if (year >= 50 && year < 100) {
-  //     return {
-  //       color: "green"
-  //     };
-  //   } else if (year >= 100 && year < 150) {
-  //     return {
-  //       color: "lightblue"
-  //     };
-  //   } else if (year >= 150 && year < 200) {
-  //     return {
-  //       color: "blue"
-  //     };
-  //   } else if (year >= 200 && year < 250) {
-  //     return {
-  //       color: "darkblue"
-  //     };
-  //   } else if (year >= 250) {
-  //     return {
-  //       color: "purple"
-  //     };
-  //   } else if ((year == 0)) {
-  //     return {
-  //       color: "gray"
-  //     };
-  //   }
-  // },
+  filter: (feature) => {
+    const isYearChecked = checkboxStates.years.includes(feature.properties.year)
+    const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
+    return isYearChecked && isEventTypeChecked //only true if both are true
+  },
+  style: function getcolor(feature) {
+    var year = feature.properties.year;
+    if (year <= -150) {
+      return {
+        color: "black"
+      };
+    } else if (year >= -100 && year < -50) {
+      return {
+        color: "red"
+      };
+    } else if (year >= -50 && year < -31) {
+      return {
+        color: "orange"
+      };
+    } else if (year >= -30 && year < -1) {
+      return {
+        color: "yellow"
+      };
+    } else if (year >= 1 && year < 15) {
+      return {
+        color: "yellow"
+      };
+    } else if (year >= 15 && year < 50) {
+      return {
+        color: "lightgreen"
+      };
+    } else if (year >= 50 && year < 100) {
+      return {
+        color: "green"
+      };
+    } else if (year >= 100 && year < 150) {
+      return {
+        color: "lightblue"
+      };
+    } else if (year >= 150 && year < 200) {
+      return {
+        color: "blue"
+      };
+    } else if (year >= 200 && year < 250) {
+      return {
+        color: "darkblue"
+      };
+    } else if (year >= 250) {
+      return {
+        color: "purple"
+      };
+    } else if ((year == 0)) {
+      return {
+        color: "gray"
+      };
+    }
+  },
   pointToLayer: function(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 8,
       weight: 2,
-      opacity: 3,
+      opacity: 1,
       fillOpacity: 0.7
 
     });
@@ -1219,8 +1213,7 @@ const geojsonLayer = L.geoJSON(null, {
   onEachFeature: function(feature, layer) {
     // variable pour le texte du popup  
     var popupText = "<b>Site:</b> " + feature.properties.field_2 +
-      "<br><b>Type:</b> " + feature.properties.eventType 
-      // "<br><b>site html:</b> " + feature.properties.field_2
+      "<br><b>Type:</b> " + feature.properties.eventType
       // dans l'idéal il faudrait ajouter un lien qui pointe vers
       //la page site, sous le § du site directement peut-être en construisant un lien
       //quand la page sites est finie: ajouter la ligne suivante dans le href
@@ -1236,44 +1229,44 @@ const geojsonLayer = L.geoJSON(null, {
       layer.openPopup();
     });
   },
-}) //.addTo(map); // Do not add the GeoJSON Layer Group to the map, it is used only as a converter from GeoJSON data into Leaflet Layers
+})//.addTo(map); // Do not add the GeoJSON Layer Group to the map, it is used only as a converter from GeoJSON data into Leaflet Layers
 
-// function updateCheckboxStates() {
-//   checkboxStates = {
-//     years: [],
-//     eventTypes: []
-//   }
+function updateCheckboxStates() {
+  checkboxStates = {
+    years: [],
+    eventTypes: []
+  }
 
-//   for (let input of document.querySelectorAll('input')) {
-//     if (input.checked) {
-//       switch (input.className) {
-//         case 'event-type':
-//           checkboxStates.eventTypes.push(input.value);
-//           break
-//         case 'year':
-//           checkboxStates.years.push(input.value);
-//           break
-//       }
-//     }
-//   }
-// }
+  for (let input of document.querySelectorAll('input')) {
+    if (input.checked) {
+      switch (input.className) {
+        case 'event-type':
+          checkboxStates.eventTypes.push(input.value);
+          break
+        case 'year':
+          checkboxStates.years.push(input.value);
+          break
+      }
+    }
+  }
+}
 
 
-// for (let input of document.querySelectorAll('input')) {
-//   //Listen to 'change' event of all inputs
-//   input.onchange = (e) => {
-//     mcg.clearLayers()
-//     geojsonLayer.clearLayers()
-//     // updateCheckboxStates()
-//     geojsonLayer.addData(jsontest).addTo(mcg)
-//   }
-// }
+for (let input of document.querySelectorAll('input')) {
+  //Listen to 'change' event of all inputs
+  input.onchange = (e) => {
+  	mcg.clearLayers()
+    geojsonLayer.clearLayers()
+    updateCheckboxStates()
+    geojsonLayer.addData(jsontest).addTo(mcg)
+  }
+}
 
 
 
 
 /****** INIT ******/
-// updateCheckboxStates()
+updateCheckboxStates()
 geojsonLayer.addData(jsontest).addTo(mcg)
 
 </script>
